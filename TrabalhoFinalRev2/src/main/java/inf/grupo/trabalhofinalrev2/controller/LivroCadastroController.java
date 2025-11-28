@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 import java.awt.*;
 
-public class LivroCadastroController extends BaseCadastroController<Livro> {
+public class LivroCadastroController extends ObraController<Livro> {
     @FXML private TextField txtTitulo;
     @FXML private TextField txtAutor;
     @FXML private TextField txtIsbn;

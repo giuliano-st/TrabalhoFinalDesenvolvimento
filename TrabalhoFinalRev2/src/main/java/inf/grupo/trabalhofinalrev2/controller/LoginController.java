@@ -32,7 +32,6 @@ public class LoginController {
             return;
         }
 
-        // Exemplo de credenciais
         if (("admin".equals(user) && "123".equals(pass)) ||
                 ("usuario".equals(user) && "456".equals(pass))) {
             try {

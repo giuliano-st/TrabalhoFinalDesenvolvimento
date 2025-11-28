@@ -13,7 +13,9 @@ public class LivroDAO {
     }
 
     public void salvar(Livro livro) throws SQLException {
-        String sql = "INSERT INTO livro (titulo, autor, isbn) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO livro (Numero_Chamada, Chamada_Local, Titulo_Uni, ISBN, Serie, Edicao, Colecao, Notas_Gerais, Titulo_Principal, Capa, Local_livro, Data_pub, Desc_Fisica, Id_Autores, Id_Assuntos, Id_Editora) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,? ,?)";
+        //Rapaiz :/
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, livro.getTitulo());
         stmt.setString(2, livro.getAutor());
