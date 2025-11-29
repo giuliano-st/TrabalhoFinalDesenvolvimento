@@ -28,6 +28,7 @@
                     <MenuItem onAction="#onConsultaLivro" text="Livro" />
                     <MenuItem onAction="#onConsultaJornal" text="Jornal" />
                     <MenuItem onAction="#onConsultaRevista" text="Revista" />
+                    <MenuItem onAction="#onPesquisaGeral" text="Pesquisa Geral" />
                 </Menu>
                 <Menu text="Sair">
                     <MenuItem fx:id="menuSair" onAction="#onSair" text="Fechar" />

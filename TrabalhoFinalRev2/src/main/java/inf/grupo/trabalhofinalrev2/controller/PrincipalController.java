@@ -102,4 +102,21 @@ public class PrincipalController implements Initializable {
         Stage stage = (Stage) menuSair.getParentPopup().getOwnerWindow();
         stage.close();
     }
+
+    @FXML
+    private void onPesquisaGeral() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/PesquisaGeral.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pesquisa Geral de Obras");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
