@@ -18,10 +18,17 @@
     </properties>
 
     <dependencies>
+        <!-- Para utilizar no sqlserver precisaria disso mas não deu certo :/ -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>13.2.1.jre11</version>
+            <version>13.3.0.jre11-preview</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
 
         <dependency>

@@ -8,5 +8,6 @@ module inf.grupo.trabalhofinalrev2 {
 
     opens inf.grupo.trabalhofinalrev2 to javafx.fxml;
     opens inf.grupo.trabalhofinalrev2.controller to javafx.fxml;
+    opens inf.grupo.trabalhofinalrev2.model to javafx.base;
     exports inf.grupo.trabalhofinalrev2;
 }

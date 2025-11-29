@@ -5,20 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    // ⚠️ 1. URL de Conexão para SQL Server
     // host: localhost, porta: 1433, banco: museu
-    // encrypt=true e trustServerCertificate=true são necessários para o driver moderno.
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=museu;encrypt=true;trustServerCertificate=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/museu?useSSL=false&serverTimezone=UTC";
 
-    // ⚠️ 2. Credenciais (Ajuste-as de acordo com seu servidor)
-    private static final String USER = "admin"; // Ex: "sa", "userapp", etc.
-    private static final String PASSWORD = "123"; // Senha do usuário acima
+    private static final String USER = "root";
+    private static final String PASSWORD = "laboratorio";
 
-    /**
-     * Estabelece e retorna a conexão com o banco de dados SQL Server.
-     * @return Uma instância de Connection.
-     * @throws SQLException Se ocorrer um erro de conexão.
-     */
     public static Connection getConnection() throws SQLException {
         try {
             // DriverManager encontrará o driver mssql-jdbc automaticamente,
@@ -33,10 +25,7 @@ public class Conexao {
         }
     }
 
-    /**
-     * Fecha a conexão com o banco de dados de forma segura.
-     * @param connection A conexão a ser fechada.
-     */
+
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
