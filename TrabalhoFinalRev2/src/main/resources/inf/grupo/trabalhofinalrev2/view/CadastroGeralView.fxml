@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox prefHeight="372.0" prefWidth="535.0" spacing="10" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.CadastroGeralController">
+
+    <!-- Tipo -->
+    <ComboBox fx:id="comboTipo" promptText="Selecione o tipo" />
+
+    <!-- Campos comuns -->
+    <TextField fx:id="txtTituloPrincipal" promptText="Título Principal" />
+    <TextField fx:id="txtCapa" promptText="Capa" />
+    <TextField fx:id="txtLocal" promptText="Local" />
+    <TextField fx:id="txtData" promptText="Data" />
+    <TextField fx:id="txtDescFisica" promptText="Descrição Física" />
+
+    <!-- Combos de FKs -->
+    <ComboBox fx:id="comboAssunto" promptText="Assunto" />
+    <ComboBox fx:id="comboEditora" promptText="Editora" />
+    <ComboBox fx:id="comboAutor" promptText="Autor" />
+
+    <!-- Grupo Livro -->
+    <VBox fx:id="paneLivro" managed="false" spacing="5" visible="false">
+        <TextField fx:id="txtNumeroChamada" promptText="Número Chamada" />
+        <TextField fx:id="txtChamadaLocal" promptText="Chamada Local" />
+        <TextField fx:id="txtTituloUniforme" promptText="Título Uniforme" />
+        <TextField fx:id="txtIsbn" promptText="ISBN" />
+        <TextField fx:id="txtSerie" promptText="Série" />
+        <TextField fx:id="txtEdicao" promptText="Edição" />
+        <TextField fx:id="txtColecao" promptText="Coleção" />
+        <TextField fx:id="txtNotasGerais" promptText="Notas Gerais" />
+        <TextField fx:id="txtVolumeLivro" promptText="Volume" />
+    </VBox>
+
+    <!-- Grupo Revista -->
+    <VBox fx:id="paneRevista" managed="false" spacing="5" visible="false">
+        <TextField fx:id="txtIssnRevista" promptText="ISSN" />
+        <TextField fx:id="txtVolumeRevista" promptText="Volume" />
+        <TextField fx:id="txtPeriodicidadeRevista" promptText="Periodicidade" />
+    </VBox>
+
+    <!-- Grupo Jornal -->
+    <VBox fx:id="paneJornal" managed="false" spacing="5" visible="false">
+        <TextField fx:id="txtIssnJornal" promptText="ISSN" />
+        <TextField fx:id="txtPeriodicidadeJornal" promptText="Periodicidade" />
+        <TextField fx:id="txtNomeJornal" promptText="Nome" />
+    </VBox>
+
+    <Button onAction="#salvarObra" text="Salvar" />
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <padding>
+        <Insets left="15.0" right="15.0" top="5.0" />
+    </padding>
+</VBox>

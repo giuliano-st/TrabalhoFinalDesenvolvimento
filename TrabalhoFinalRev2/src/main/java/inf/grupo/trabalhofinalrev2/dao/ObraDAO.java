@@ -239,4 +239,54 @@ public class ObraDAO {
         return lista;
     }
 
+    public int inserir(Obra obra) {
+        String sql = "INSERT INTO OBRA (" +
+                "Titulo_Principal, Capa, Local, Data, Desc_Fisica, Numero_Chamada, " +
+                "Chamada_Local, Titulo_Uniforme, ISBN, Serie, Edicao, Colecao, " +
+                "Notas_Gerais, ISSN, Volume, Periodicidade, Nome, Tipo, " +
+                "FK_Assunto_ID, FK_Editora_ID, FK_Autores_ID" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, obra.getTituloPrincipal());
+            stmt.setString(2, obra.getCapa());
+            stmt.setString(3, obra.getLocal());
+            stmt.setString(4, obra.getData());
+            stmt.setString(5, obra.getDescFisica());
+            stmt.setString(6, obra.getNumeroChamada());
+            stmt.setString(7, obra.getChamadaLocal());
+            stmt.setString(8, obra.getTituloUniforme());
+            stmt.setString(9, obra.getIsbn());
+            stmt.setObject(10, obra.getSerie(), Types.INTEGER);
+            stmt.setObject(11, obra.getEdicao(), Types.INTEGER);
+            stmt.setString(12, obra.getColecao());
+            stmt.setString(13, obra.getNotasGerais());
+            stmt.setString(14, obra.getIssn());
+            stmt.setObject(15, obra.getVolume(), Types.INTEGER);
+            stmt.setString(16, obra.getPeriodicidade());
+            stmt.setString(17, obra.getNome());
+            stmt.setString(18, obra.getTipo());
+            stmt.setInt(19, obra.getIdAssunto());
+            stmt.setInt(20, obra.getIdEditora());
+            stmt.setInt(21, obra.getIdAutor());
+
+            stmt.executeUpdate();
+
+            // Recupera o ID gerado
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int idGerado = rs.getInt(1);
+                    obra.setId(idGerado);
+                    return idGerado;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // erro
+    }
+
 }

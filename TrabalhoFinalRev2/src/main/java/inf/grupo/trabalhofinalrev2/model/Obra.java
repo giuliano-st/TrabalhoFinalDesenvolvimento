@@ -25,6 +25,7 @@ public class Obra {
     private String assuntoNome;
     private Integer idEditora;
     private Integer idAssunto;
+    private Integer idAutor; //ihh
 
     public Integer getIdEditora() {
         return idEditora;
@@ -209,4 +210,8 @@ public class Obra {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    public Integer getIdAutor() { return idAutor; }
+
+    public void setIdAutor(Integer idAutor) { this.idAutor = idAutor; }
 }

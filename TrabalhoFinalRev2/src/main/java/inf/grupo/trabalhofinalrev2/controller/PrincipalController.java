@@ -131,4 +131,20 @@ public class PrincipalController implements Initializable {
         }
     }
 
+    @FXML
+    private  void onCadastroGeral() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/CadastroGeralView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Cadastro Geral de Obras");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
