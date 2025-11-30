@@ -83,13 +83,22 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    private void onConsultaLivro() {
-        System.out.println("Abrir tela de consulta de Livro");
-    }
-
-    @FXML
     private void onConsultaJornal()  {
-        System.out.println("Abrir tela de consulta de Jornal");
+        try {
+            // 1. Aponta para o FXML da consulta de Jornal
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/ConsultaJornalView.fxml"));
+            Parent root = loader.load();
+
+            // 2. Cria e exibe o novo Stage
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pesquisar Jornais no Acervo");
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar a tela de Consulta de Jornais.");
+            e.printStackTrace();
+        }
     }
 
 
@@ -143,6 +152,25 @@ public class PrincipalController implements Initializable {
             stage.show();
 
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onConsultaLivro() {
+        try {
+            // 1. Carregar o FXML da Consulta de Livro
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/ConsultaLivroView.fxml"));
+            Parent root = loader.load();
+
+            // 2. Configurar e exibir a nova janela
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pesquisar Livros no Acervo");
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar a tela de Consulta de Livros.");
             e.printStackTrace();
         }
     }

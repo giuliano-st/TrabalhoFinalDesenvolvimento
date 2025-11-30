@@ -289,4 +289,176 @@ public class ObraDAO {
         return -1; // erro
     }
 
+    public List<Obra> buscarJornaisFiltrados(String titulo, String data, String issn, String nomeJornal, String assunto, String periodicidade) {
+        List<Obra> jornais = new ArrayList<>();
+
+        // A QUERY CORRIGIDA para usar os nomes de coluna do seu banco (com underline) e FKs corretas
+        String sql = """
+            SELECT  o.*, 
+                    e.Nome AS editora_nome, 
+                    a.Assunto AS assunto_nome 
+            FROM OBRA o 
+            LEFT JOIN EDITORA e ON o.FK_Editora_ID = e.ID 
+            LEFT JOIN ASSUNTOS a ON o.FK_Assunto_ID = a.ID 
+            WHERE o.Tipo = 'Jornal'
+              AND (? IS NULL OR o.Titulo_Principal LIKE ?) 
+              AND (? IS NULL OR o.Data LIKE ?) 
+              AND (? IS NULL OR o.ISSN LIKE ?) 
+              AND (? IS NULL OR o.Nome LIKE ?) 
+              AND (? IS NULL OR a.Assunto LIKE ?)
+              AND (? IS NULL OR o.Periodicidade = ?)
+            ORDER BY o.Titulo_Principal
+        """;
+        // OBS: Note que o filtro do nome do jornal é feito diretamente na coluna o.Nome
+
+        // Lista para armazenar os valores dos parâmetros
+        List<Object> params = new ArrayList<>();
+
+        // Adicionar filtros dinamicamente
+        // Titulo
+        if (titulo != null && !titulo.trim().isEmpty()) {
+            params.add(titulo.trim());
+            params.add("%" + titulo.trim() + "%");
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+        // Data
+        if (data != null && !data.trim().isEmpty()) {
+            params.add(data.trim());
+            params.add("%" + data.trim() + "%");
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+        // ISSN
+        if (issn != null && !issn.trim().isEmpty()) {
+            params.add(issn.trim());
+            params.add("%" + issn.trim() + "%");
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+        // NOME (Jornal)
+        if (nomeJornal != null && !nomeJornal.trim().isEmpty()) {
+            params.add(nomeJornal.trim());
+            params.add("%" + nomeJornal.trim() + "%");
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+        // ASSUNTO
+        if (assunto != null && !assunto.trim().isEmpty()) {
+            params.add(assunto.trim());
+            params.add("%" + assunto.trim() + "%");
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+        // PERIODICIDADE
+        if (periodicidade != null) {
+            params.add(periodicidade);
+            params.add(periodicidade);
+        } else {
+            params.add(null);
+            params.add(null);
+        }
+
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Atribuir os parâmetros
+            // Usando o mesmo padrão de IF IS NULL do método buscarRevistasFiltradas
+            for (int i = 0; i < params.size(); i++) {
+                // O getObject() é mais seguro para atribuir null ou String
+                stmt.setObject(i + 1, params.get(i));
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    // Chama o mapearObra para preencher todos os campos (ID, Titulo_Principal, Data, ISSN, Nome, etc.)
+                    Obra obra = mapearObra(rs);
+
+                    // Adiciona os nomes extras do JOIN
+                    obra.setEditoraNome(rs.getString("editora_nome"));
+                    obra.setAssuntoNome(rs.getString("assunto_nome"));
+
+                    jornais.add(obra);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar jornais filtrados: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return jornais;
+    }
+
+    public List<Obra> buscarLivrosFiltrados(String titulo, String autorNome, String editoraNome, String data, String colecao, String isbn) {
+        List<Obra> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT  o.*,
+                e.Nome    AS editora_nome,
+                a.Assunto AS assunto_nome,
+                aut.Nome  AS autor_nome
+        FROM obra o
+        LEFT JOIN editora e   ON o.FK_Editora_ID = e.ID
+        LEFT JOIN assuntos a   ON o.FK_Assunto_ID = a.ID
+        LEFT JOIN autores aut ON o.FK_Autores_ID = aut.ID  -- JOIN com Tabela Autores
+        WHERE o.Tipo = 'LIVRO'
+          AND (? IS NULL OR o.Titulo_Principal LIKE ?)
+          AND (? IS NULL OR aut.Nome LIKE ?)              -- Filtro por Nome do Autor
+          AND (? IS NULL OR e.Nome LIKE ?)                -- Filtro por Nome da Editora
+          AND (? IS NULL OR o.Data LIKE ?)
+          AND (? IS NULL OR o.Colecao LIKE ?)             -- Filtro por Coleção
+          AND (? IS NULL OR o.ISBN LIKE ?)                -- Filtro por ISBN
+        ORDER BY o.Titulo_Principal
+    """;
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Função utilitária para aplicar o filtro NULL OR LIKE
+            java.util.function.BiConsumer<Integer, String> applyFilter = (index, value) -> {
+                try {
+                    if (value != null && !value.trim().isEmpty()) {
+                        ps.setString(index, value.trim());
+                        ps.setString(index + 1, "%" + value.trim() + "%");
+                    } else {
+                        ps.setString(index, null);
+                        ps.setString(index + 1, null);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            };
+
+            // Aplicação dos Filtros
+            applyFilter.accept(1, titulo);
+            applyFilter.accept(3, autorNome);
+            applyFilter.accept(5, editoraNome);
+            applyFilter.accept(7, data);
+            applyFilter.accept(9, colecao);
+            applyFilter.accept(11, isbn);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Obra o = mapearObra(rs);
+                o.setEditoraNome(rs.getString("editora_nome"));
+                o.setAssuntoNome(rs.getString("assunto_nome"));
+
+                o.setNome(rs.getString("autor_nome"));
+
+                lista.add(o);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+
 }

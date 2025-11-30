@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15" style="-fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="inf.grupo.trabalhofinalrev2.controller.ConsultaJornalController">
+
+    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Pesquisar Jornais no Acervo" />
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="20" />
+            <ColumnConstraints percentWidth="30" />
+            <ColumnConstraints percentWidth="20" />
+            <ColumnConstraints percentWidth="30" />
+        </columnConstraints>
+
+        <Label text="Título:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="campoTitulo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Data:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <TextField fx:id="campoData" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+        <Label text="ISSN:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="campoIssn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Nome Jornal:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="campoNomeJornal" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+        <Label text="Assunto:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="campoAssunto" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Periodicidade:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <ComboBox fx:id="comboPeriodicidade" prefHeight="26.0" prefWidth="140.0" promptText="Selecione" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+
+    <TableView fx:id="tabelaJornais" prefHeight="300" />
+
+    <Button fx:id="btnDetalhes" alignment="CENTER" onAction="#onVerDetalhes" text="Ver detalhes" />
+</VBox>

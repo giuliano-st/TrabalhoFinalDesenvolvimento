@@ -9,6 +9,10 @@ public class Assunto {
         this.assunto = assunto;
     }
 
+    public Assunto(String assunto) {
+        this.assunto = assunto;
+    }
+
     public int getId() { return id; }
     public String getAssunto() { return assunto; }
 

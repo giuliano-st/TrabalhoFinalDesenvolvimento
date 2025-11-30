@@ -3,59 +3,179 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<VBox prefHeight="372.0" prefWidth="535.0" spacing="10" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.CadastroGeralController">
+<BorderPane prefHeight="700.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.CadastroGeralController">
+    <top>
+        <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #f0f0f0; -fx-padding: 10;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Cadastro de Obras 📚" textFill="#006494">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Separator />
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Por favor, selecione o tipo de obra que deseja cadastrar: " />
+                        <ComboBox fx:id="comboTipo" HBox.hgrow="ALWAYS" promptText="Selecione o tipo" />
+                    </children>
+                </HBox>
 
-    <!-- Tipo -->
-    <ComboBox fx:id="comboTipo" promptText="Selecione o tipo" />
+                <Separator />
 
-    <!-- Campos comuns -->
-    <TextField fx:id="txtTituloPrincipal" promptText="Título Principal" />
-    <TextField fx:id="txtCapa" promptText="Capa" />
-    <TextField fx:id="txtLocal" promptText="Local" />
-    <TextField fx:id="txtData" promptText="Data" />
-    <TextField fx:id="txtDescFisica" promptText="Descrição Física" />
+                <Label text="Dados Comuns da Obra" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <children>
+                        <TextField fx:id="txtTituloPrincipal" promptText="Título Principal" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
 
-    <!-- Combos de FKs -->
-    <ComboBox fx:id="comboAssunto" promptText="Assunto" />
-    <ComboBox fx:id="comboEditora" promptText="Editora" />
-    <ComboBox fx:id="comboAutor" promptText="Autor" />
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <children>
+                                <Button onAction="#selecionarCapa" text="Selecionar Capa" />
+                                <Label fx:id="lblCaminhoCapa" text="Nenhuma capa selecionada" style="-fx-text-fill: gray;" HBox.hgrow="ALWAYS" />
+                            </children>
+                        </HBox>
+                        <TextField fx:id="txtLocal" promptText="Local" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <!-- Grupo Livro -->
-    <VBox fx:id="paneLivro" managed="false" spacing="5" visible="false">
-        <TextField fx:id="txtNumeroChamada" promptText="Número Chamada" />
-        <TextField fx:id="txtChamadaLocal" promptText="Chamada Local" />
-        <TextField fx:id="txtTituloUniforme" promptText="Título Uniforme" />
-        <TextField fx:id="txtIsbn" promptText="ISBN" />
-        <TextField fx:id="txtSerie" promptText="Série" />
-        <TextField fx:id="txtEdicao" promptText="Edição" />
-        <TextField fx:id="txtColecao" promptText="Coleção" />
-        <TextField fx:id="txtNotasGerais" promptText="Notas Gerais" />
-        <TextField fx:id="txtVolumeLivro" promptText="Volume" />
-    </VBox>
+                        <TextField fx:id="txtData" promptText="Data (Ex: 2023)" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtDescFisica" promptText="Descrição Física" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    </children>
+                </GridPane>
 
-    <!-- Grupo Revista -->
-    <VBox fx:id="paneRevista" managed="false" spacing="5" visible="false">
-        <TextField fx:id="txtIssnRevista" promptText="ISSN" />
-        <TextField fx:id="txtVolumeRevista" promptText="Volume" />
-        <TextField fx:id="txtPeriodicidadeRevista" promptText="Periodicidade" />
-    </VBox>
+                <Separator />
 
-    <!-- Grupo Jornal -->
-    <VBox fx:id="paneJornal" managed="false" spacing="5" visible="false">
-        <TextField fx:id="txtIssnJornal" promptText="ISSN" />
-        <TextField fx:id="txtPeriodicidadeJornal" promptText="Periodicidade" />
-        <TextField fx:id="txtNomeJornal" promptText="Nome" />
-    </VBox>
+                <Label text="Associação com Outros Dados" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <children>
 
-    <Button onAction="#salvarObra" text="Salvar" />
-    <opaqueInsets>
-        <Insets />
-    </opaqueInsets>
-    <padding>
-        <Insets left="15.0" right="15.0" top="5.0" />
-    </padding>
-</VBox>
+                        <VBox spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <ComboBox
+                                        fx:id="comboAssunto"
+                                        maxWidth="Infinity"
+                                        promptText="Assunto"
+                                        VBox.vgrow="ALWAYS"
+                                        style="-fx-alignment: center;"
+                                />
+                                <Button onAction="#cadastrarNovoAssunto" text="+ Cadastrar Novo Assunto" maxWidth="1.7976931348623157E308" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <children>
+                                <ComboBox
+                                        fx:id="comboEditora"
+                                        maxWidth="Infinity"
+                                        promptText="Editora"
+                                        VBox.vgrow="ALWAYS"
+                                        style="-fx-alignment: center;"
+                                />
+                                <Button onAction="#cadastrarNovaEditora" text="+ Cadastrar Nova Editora" maxWidth="1.7976931348623157E308" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <children>
+                                <ComboBox
+                                        fx:id="comboAutor"
+                                        maxWidth="Infinity"
+                                        promptText="Autor"
+                                        VBox.vgrow="ALWAYS"
+                                        style="-fx-alignment: center;"
+                                />
+                                <Button onAction="#cadastrarNovoAutor" text="+ Cadastrar Novo Autor" maxWidth="1.7976931348623157E308" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <Separator />
+
+                <Label text="Detalhes Específicos" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+
+                <VBox fx:id="paneLivro" managed="false" spacing="10.0" visible="false">
+                    <children>
+                        <GridPane hgap="10.0" vgap="10.0">
+                            <columnConstraints>
+                                <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <children>
+                                <TextField fx:id="txtNumeroChamada" promptText="Número Chamada" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="txtChamadaLocal" promptText="Chamada Local" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <TextField fx:id="txtTituloUniforme" promptText="Título Uniforme" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                <TextField fx:id="txtIsbn" promptText="ISBN" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtSerie" promptText="Série" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtEdicao" promptText="Edição" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <TextField fx:id="txtColecao" promptText="Coleção" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <TextField fx:id="txtNotasGerais" promptText="Notas Gerais" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                                <TextField fx:id="txtVolumeLivro" promptText="Volume" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+
+                <GridPane fx:id="paneRevista" hgap="10.0" managed="false" vgap="10.0" visible="false">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <children>
+                        <TextField fx:id="txtIssnRevista" promptText="ISSN" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="txtVolumeRevista" promptText="Volume" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="txtPeriodicidadeRevista" promptText="Periodicidade" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    </children>
+                </GridPane>
+
+                <GridPane fx:id="paneJornal" hgap="10.0" managed="false" vgap="10.0" visible="false">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <children>
+                        <TextField fx:id="txtIssnJornal" promptText="ISSN" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="txtPeriodicidadeJornal" promptText="Periodicidade" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="txtNomeJornal" promptText="Nome" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #f0f0f0; -fx-padding: 10;" BorderPane.alignment="CENTER">
+            <children>
+                <Button onAction="#salvarObra" text="Salvar Obra" style="-fx-font-weight: bold; -fx-background-color: #008CBA; -fx-text-fill: white; -fx-padding: 8 15;" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

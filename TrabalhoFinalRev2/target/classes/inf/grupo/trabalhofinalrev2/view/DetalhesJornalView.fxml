@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="358.0" spacing="12" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.DetalhesJornalController">
+
+    <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Detalhes da Obra (Jornal)" />
+
+    <GridPane hgap="20" vgap="12"> <columnConstraints>
+        <ColumnConstraints hgrow="NEVER" percentWidth="20.0" /> <ColumnConstraints hgrow="ALWAYS" percentWidth="30.0" /> <ColumnConstraints hgrow="NEVER" percentWidth="20.0" /> <ColumnConstraints hgrow="ALWAYS" percentWidth="30.0" /> </columnConstraints>
+
+        <Label text="Id:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="Id" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Título:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="titulo" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Data:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="data" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="ISSN:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="issn" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Nome Jornal:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="nomeJornal" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label text="Assunto:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <TextField fx:id="assunto" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+
+        <Label text="Periodicidade:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <TextField fx:id="periodicidade" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+        <Label text="Localização:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <TextField fx:id="localizacao" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+
+        <Label text="Descrição:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <TextField fx:id="descricao" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+
+        <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+
+    </GridPane>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <children>
+            <Button fx:id="btn_Capa" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0"  onAction="#handleVisualizarCapa" text="Visualizar Capa" />
+            <Button fx:id="btn_Editar" layoutX="405.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Editar Dados" />
+            <Button fx:id="btn_Disponibilidade" layoutX="193.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="153.0" onAction="#handleVerificarDisponibilidade" text="Verificar Disponibilidade" />
+        </children>
+    </AnchorPane>
+
+</VBox>
