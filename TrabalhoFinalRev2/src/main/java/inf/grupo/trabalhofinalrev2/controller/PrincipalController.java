@@ -88,14 +88,10 @@ public class PrincipalController implements Initializable {
     }
 
     @FXML
-    private void onConsultaJornal() {
+    private void onConsultaJornal()  {
         System.out.println("Abrir tela de consulta de Jornal");
     }
 
-    //@FXML
-    //private void onConsultaRevista() {
-       // System.out.println("Abrir tela de consulta de Revista");
-    //}
 
     @FXML
     private void onSair() {

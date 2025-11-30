@@ -30,8 +30,8 @@ public class ConsultaRevistaController {
     @FXML
     public void initialize() {
 
-        comboPeriodicidade.getItems().addAll("SEMANAL", "MENSAL", "ANUAL");
-
+        comboPeriodicidade.getItems().addAll("QUALQUER","SEMANAL", "MENSAL", "BIMESTRAL", "ANUAL");
+        comboPeriodicidade.setValue("QUALQUER");
         configurarColunas();
 
         campoTitulo.textProperty().addListener((obs, oldV, newV) -> atualizarTabela());
@@ -82,13 +82,20 @@ public class ConsultaRevistaController {
     }
 
     private void atualizarTabela() {
+        String periodicidade;
+        if(comboPeriodicidade.getValue().equals("QUALQUER")) {
+            periodicidade = null;
+        }else{
+            periodicidade = comboPeriodicidade.getValue();
+        }
+
         List<Obra> revistas = obraDAO.buscarRevistasFiltradas(
                 campoTitulo.getText(),
                 campoData.getText(),
                 campoIssn.getText(),
                 campoEditora.getText(),
                 campoAssunto.getText(),
-                comboPeriodicidade.getValue()
+                periodicidade
         );
 
         tabelaRevistas.getItems().setAll(revistas);
