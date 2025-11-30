@@ -21,6 +21,42 @@ public class Obra {
     private String periodicidade;
     private String nome;
     private String tipo;
+    private String editoraNome;
+    private String assuntoNome;
+    private Integer idEditora;
+    private Integer idAssunto;
+
+    public Integer getIdEditora() {
+        return idEditora;
+    }
+
+    public void setIdEditora(Integer idEditora) {
+        this.idEditora = idEditora;
+    }
+
+    public Integer getIdAssunto() {
+        return idAssunto;
+    }
+
+    public void setIdAssunto(Integer idAssunto) {
+        this.idAssunto = idAssunto;
+    }
+
+    public String getEditoraNome() {
+        return editoraNome;
+    }
+
+    public void setEditoraNome(String editoraNome) {
+        this.editoraNome = editoraNome;
+    }
+
+    public String getAssuntoNome() {
+        return assuntoNome;
+    }
+
+    public void setAssuntoNome(String assuntoNome) {
+        this.assuntoNome = assuntoNome;
+    }
 
     public int getId() {
         return id;

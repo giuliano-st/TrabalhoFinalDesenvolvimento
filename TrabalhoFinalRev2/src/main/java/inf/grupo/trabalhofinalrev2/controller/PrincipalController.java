@@ -92,10 +92,10 @@ public class PrincipalController implements Initializable {
         System.out.println("Abrir tela de consulta de Jornal");
     }
 
-    @FXML
-    private void onConsultaRevista() {
-        System.out.println("Abrir tela de consulta de Revista");
-    }
+    //@FXML
+    //private void onConsultaRevista() {
+       // System.out.println("Abrir tela de consulta de Revista");
+    //}
 
     @FXML
     private void onSair() {
@@ -112,6 +112,22 @@ public class PrincipalController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Pesquisa Geral de Obras");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onConsultaRevista() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/ConsultaRevistaView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Pesquisar Revistas no Acervo");
             stage.show();
 
         } catch (IOException e) {

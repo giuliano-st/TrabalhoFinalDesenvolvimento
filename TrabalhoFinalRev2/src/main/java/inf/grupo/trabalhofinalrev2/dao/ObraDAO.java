@@ -12,7 +12,7 @@ public class ObraDAO {
     public List<Obra> buscarPorTipo(String tipo) {
         List<Obra> lista = new ArrayList<>();
 
-        String sql = "SELECT * FROM OBRA WHERE Tipo = ?";
+        String sql = "SELECT * FROM obra WHERE Tipo = ?";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -21,23 +21,7 @@ public class ObraDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Obra o = new Obra();
-
-                o.setId(rs.getInt("ID"));
-                o.setTituloPrincipal(rs.getString("Titulo_Principal"));
-                o.setLocal(rs.getString("Local"));
-                o.setData(rs.getString("Data"));
-                o.setTituloUniforme(rs.getString("Titulo_Uniforme"));
-                o.setIsbn(rs.getString("ISBN"));
-                o.setSerie(rs.getInt("Serie"));
-                o.setEdicao(rs.getInt("Edicao"));
-                o.setColecao(rs.getString("Colecao"));
-                o.setIssn(rs.getString("ISSN"));
-                o.setVolume(rs.getInt("Volume"));
-                o.setPeriodicidade(rs.getString("Periodicidade"));
-                o.setNome(rs.getString("Nome"));
-                o.setTipo(rs.getString("Tipo"));
-
+                Obra o = mapearObra(rs);
                 lista.add(o);
             }
 
@@ -46,5 +30,92 @@ public class ObraDAO {
         }
 
         return lista;
+    }
+
+
+    public List<Obra> buscarRevistasFiltradas(String titulo, String data, String issn,
+                                              String editora, String assunto, String periodicidade) {
+
+        List<Obra> lista = new ArrayList<>();
+
+        String sql = """
+            SELECT  o.*,
+                    e.Nome    AS editora_nome,
+                    a.Assunto AS assunto_nome
+            FROM obra o
+            LEFT JOIN editora e   ON o.FK_Editora_ID = e.ID
+            LEFT JOIN assuntos a   ON o.FK_Assunto_ID = a.ID
+            WHERE o.Tipo = 'Revista'
+              AND (? IS NULL OR o.Titulo_Principal LIKE ?)
+              AND (? IS NULL OR o.Data LIKE ?)
+              AND (? IS NULL OR o.ISSN LIKE ?)
+              AND (? IS NULL OR e.Nome LIKE ?)
+              AND (? IS NULL OR a.Assunto LIKE ?)
+              AND (? IS NULL OR o.Periodicidade = ?)
+            ORDER BY o.Titulo_Principal
+        """;
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, titulo);
+            ps.setString(2, "%" + titulo + "%");
+
+            ps.setString(3, data);
+            ps.setString(4, "%" + data + "%");
+
+            ps.setString(5, issn);
+            ps.setString(6, "%" + issn + "%");
+
+            ps.setString(7, editora);
+            ps.setString(8, "%" + editora + "%");
+
+            ps.setString(9, assunto);
+            ps.setString(10, "%" + assunto + "%");
+
+            ps.setString(11, periodicidade);
+            ps.setString(12, periodicidade);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Obra o = mapearObra(rs);
+                o.setEditoraNome(rs.getString("editora_nome"));
+                o.setAssuntoNome(rs.getString("assunto_nome"));
+                lista.add(o);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+
+
+    private Obra mapearObra(ResultSet rs) throws SQLException {
+        Obra o = new Obra();
+
+        o.setId(rs.getInt("ID"));
+        o.setTituloPrincipal(rs.getString("Titulo_Principal"));
+        o.setLocal(rs.getString("Local"));
+        o.setData(rs.getString("Data"));
+        o.setTituloUniforme(rs.getString("Titulo_Uniforme"));
+        o.setIsbn(rs.getString("ISBN"));
+        o.setSerie(rs.getInt("Serie"));
+        o.setEdicao(rs.getInt("Edicao"));
+        o.setColecao(rs.getString("Colecao"));
+        o.setIssn(rs.getString("ISSN"));
+        o.setVolume(rs.getInt("Volume"));
+        o.setPeriodicidade(rs.getString("Periodicidade"));
+        o.setNome(rs.getString("Nome"));
+        o.setTipo(rs.getString("Tipo"));
+
+        // FKs corretas conforme seu banco REAL
+        o.setIdEditora(rs.getInt("FK_Editora_ID"));
+        o.setIdAssunto(rs.getInt("FK_Assunto_ID"));
+
+        return o;
     }
 }

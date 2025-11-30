@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="inf.grupo.trabalhofinalrev2.controller.DetalhesRevistaController"
+      style="-fx-padding: 20;">
+
+    <Label text="Detalhes da Revista" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+
+        <Label text="Título:" GridPane.rowIndex="0"/>
+        <TextField fx:id="titulo" GridPane.rowIndex="0" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Data:" GridPane.rowIndex="1"/>
+        <TextField fx:id="data" GridPane.rowIndex="1" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="ISSN:" GridPane.rowIndex="2"/>
+        <TextField fx:id="issn" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Editora:" GridPane.rowIndex="3"/>
+        <TextField fx:id="editora" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Assunto:" GridPane.rowIndex="4"/>
+        <TextField fx:id="assunto" GridPane.rowIndex="4" GridPane.columnIndex="1" editable="false"/>
+
+        <Label text="Periodicidade:" GridPane.rowIndex="5"/>
+        <TextField fx:id="periodicidade" GridPane.rowIndex="5" GridPane.columnIndex="1" editable="false"/>
+    </GridPane>
+
+</VBox>

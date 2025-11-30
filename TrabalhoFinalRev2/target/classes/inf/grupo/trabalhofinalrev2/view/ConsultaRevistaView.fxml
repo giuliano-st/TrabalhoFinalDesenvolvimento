@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="inf.grupo.trabalhofinalrev2.controller.ConsultaRevistaController"
+      style="-fx-padding: 20;">
+
+    <Label text="Pesquisar Revistas no Acervo" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="20"/>
+            <ColumnConstraints percentWidth="30"/>
+            <ColumnConstraints percentWidth="20"/>
+            <ColumnConstraints percentWidth="30"/>
+        </columnConstraints>
+
+        <!-- Linha 1 -->
+        <Label text="Título:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoTitulo" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Data:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <TextField fx:id="campoData" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+        <!-- Linha 2 -->
+        <Label text="ISSN:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoIssn" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Editora:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <TextField fx:id="campoEditora" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+        <!-- Linha 3 -->
+        <Label text="Assunto:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="campoAssunto" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Periodicidade:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <ComboBox fx:id="comboPeriodicidade" GridPane.rowIndex="2" GridPane.columnIndex="3"
+                  promptText="Selecione"/>
+    </GridPane>
+
+    <TableView fx:id="tabelaRevistas" prefHeight="300"/>
+
+    <Button fx:id="btnDetalhes" text="Ver detalhes" onAction="#onVerDetalhes"/>
+</VBox>
