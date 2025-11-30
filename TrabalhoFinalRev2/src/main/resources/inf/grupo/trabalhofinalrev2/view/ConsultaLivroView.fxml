@@ -1,52 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox spacing="15" style="-fx-padding: 20;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="inf.grupo.trabalhofinalrev2.controller.ConsultaLivroController">
-
-    <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Pesquisar Livros no Acervo" />
-
-    <GridPane hgap="10" vgap="10">
-        <columnConstraints>
-            <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="35" />
-            <ColumnConstraints percentWidth="15" />
-            <ColumnConstraints percentWidth="35" />
-        </columnConstraints>
-
-        <Label text="Título:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="txtFiltroTitulo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-        <Label text="Autor:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <TextField fx:id="txtFiltroAutor" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-
-        <Label text="Editora:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="txtFiltroEditora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-        <Label text="Data/Ano:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <TextField fx:id="txtFiltroData" promptText="Ex: 2023" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-
-        <Label text="Coleção:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="txtFiltroColecao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-        <Label text="ISBN:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-        <TextField fx:id="txtFiltroISBN" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-
-        <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
-
-    <TableView fx:id="tabelaLivros" prefHeight="300" />
-
-    <Button fx:id="btnDetalhes" alignment="CENTER_LEFT" onAction="#onVerDetalhes" text="Ver Detalhes" />
-</VBox>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.ConsultaLivroController">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="586.0" prefWidth="786.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Pesquisar Livros no Acervo">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" top="15.0" />
+                    </VBox.margin>
+                </Label>
+                <GridPane hgap="10.0" prefHeight="100.0" prefWidth="770.0">
+                    <columnConstraints>
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <javafx.scene.layout.ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <javafx.scene.layout.RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label text="Título:" />
+                        <TextField fx:id="txtTitulo" GridPane.columnIndex="1" />
+                        <Label text="Autor:" GridPane.columnIndex="2" />
+                        <TextField fx:id="txtAutor" GridPane.columnIndex="3" />
+                        <Label text="Editora:" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtEditora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Data/Ano:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtData" promptText="Ex: 2023" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label text="Coleção:" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtColecao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="ISBN:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="txtIsbn" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                    </VBox.margin>
+                </GridPane>
+                <!-- Removida a HBox que continha o botão "Buscar Livros" -->
+                <TableView fx:id="tabelaLivros" prefHeight="350.0" prefWidth="770.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colID" prefWidth="40.0" text="ID" />
+                        <TableColumn fx:id="colTitulo" prefWidth="220.0" text="Título Principal" />
+                        <TableColumn fx:id="colAutor" prefWidth="150.0" text="Autor" />
+                        <TableColumn fx:id="colEditora" prefWidth="150.0" text="Editora" />
+                        <TableColumn fx:id="colColecao" prefWidth="120.0" text="Coleção" />
+                        <TableColumn fx:id="colIsbn" prefWidth="120.0" text="ISBN" />
+                        <TableColumn fx:id="colData" prefWidth="70.0" text="Data" />
+                    </columns>
+                    <VBox.margin>
+                        <Insets left="15.0" right="15.0" top="10.0" />
+                    </VBox.margin>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+                <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="770.0" spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#handleVerificarDisponibilidade" text="Verificar Disponibilidade" />
+                        <Button mnemonicParsing="false" onAction="#handleVisualizarCapa" text="Visualizar Capa" />
+                        <Button mnemonicParsing="false" onAction="#handleVerDetalhes" text="Ver Detalhes" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
+                    </VBox.margin>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

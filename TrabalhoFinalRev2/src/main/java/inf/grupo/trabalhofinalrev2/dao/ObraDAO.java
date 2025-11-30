@@ -94,7 +94,9 @@ public class ObraDAO {
     }
 
 
-
+    /**
+     * MÉTODO CORRIGIDO: Adicionando a leitura dos campos Numero_Chamada, Chamada_Local e Notas_Gerais.
+     */
     private Obra mapearObra(ResultSet rs) throws SQLException {
         Obra o = new Obra();
 
@@ -114,6 +116,12 @@ public class ObraDAO {
         o.setTipo(rs.getString("Tipo"));
         o.setDescFisica(rs.getString("Desc_Fisica"));
         o.setCapa(rs.getString("Capa"));
+
+        // === CAMPOS FALTANDO ADICIONADOS AQUI ===
+        o.setNumeroChamada(rs.getString("Numero_Chamada"));
+        o.setChamadaLocal(rs.getString("Chamada_Local"));
+        o.setNotasGerais(rs.getString("Notas_Gerais"));
+        // =======================================
 
         // FKs corretas conforme seu banco REAL
         o.setIdEditora(rs.getInt("FK_Editora_ID"));
