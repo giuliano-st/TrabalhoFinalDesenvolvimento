@@ -21,6 +21,22 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private MenuItem menuSair;
+    @FXML private MenuItem menuCadastroGeral;
+    @FXML private MenuItem menuRemoverGeral;
+    @FXML private MenuItem menuAtualizarGeral;
+
+    private boolean isAdmin;
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+
+        if (!isAdmin) {
+            // Usuário comum só pode consultar
+            menuCadastroGeral.setDisable(true);
+            menuRemoverGeral.setDisable(true);
+            menuAtualizarGeral.setDisable(true);
+        }
+    }
 
     public void initialize(URL location, ResourceBundle resources) {
         //Teste de Conexão com o Banco de Dados

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="370.0" prefWidth="358.0" spacing="12" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.DetalhesJornalController">
+<VBox alignment="TOP_CENTER" prefHeight="377.0" prefWidth="534.0" spacing="12" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.DetalhesJornalController">
 
     <Label style="-fx-font-size: 18; -fx-font-weight: bold;" text="Detalhes da Obra (Jornal)" />
 
@@ -54,9 +54,8 @@
     </GridPane>
     <AnchorPane prefHeight="200.0" prefWidth="200.0">
         <children>
-            <Button fx:id="btn_Capa" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0"  onAction="#handleVisualizarCapa" text="Visualizar Capa" />
-            <Button fx:id="btn_Editar" layoutX="405.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Editar Dados" />
-            <Button fx:id="btn_Disponibilidade" layoutX="193.0" layoutY="32.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="153.0" onAction="#handleVerificarDisponibilidade" text="Verificar Disponibilidade" />
+            <Button fx:id="btn_Capa" layoutX="73.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleVisualizarCapa" prefHeight="26.0" prefWidth="153.0" text="Visualizar Capa" />
+            <Button fx:id="btn_Disponibilidade" layoutX="302.0" layoutY="32.0" mnemonicParsing="false" onAction="#handleVerificarDisponibilidade" prefHeight="26.0" prefWidth="153.0" text="Verificar Disponibilidade" />
         </children>
     </AnchorPane>
 

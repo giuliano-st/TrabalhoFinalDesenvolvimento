@@ -32,22 +32,33 @@ public class LoginController {
             return;
         }
 
-        if (("admin".equals(user) && "123".equals(pass)) ||
-                ("usuario".equals(user) && "456".equals(pass))) {
-            try {
-                // Carrega a tela Principal
-                Stage stage = (Stage) messageLabel.getScene().getWindow();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/PrincipalView.fxml")));
-                stage.setScene(scene);
-                stage.setTitle("Sistema - Tela Principal");
-                stage.centerOnScreen();
-            } catch (IOException e) {
-                e.printStackTrace();
-                messageLabel.setText("Erro ao carregar a tela principal.");
-            }
+        boolean isAdmin = false;
+
+        if ("admin".equals(user) && "123".equals(pass)) {
+            isAdmin = true;
+        } else if ("usuario".equals(user) && "456".equals(pass)) {
+            isAdmin = false;
         } else {
             messageLabel.setText("Usuário ou senha inválidos.");
             messageLabel.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/inf/grupo/trabalhofinalrev2/view/PrincipalView.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // Pega o controller da tela principal
+            PrincipalController principalController = loader.getController();
+            principalController.setAdmin(isAdmin);
+
+            Stage stage = (Stage) messageLabel.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Sistema - Tela Principal");
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+            messageLabel.setText("Erro ao carregar a tela principal.");
         }
     }
 
