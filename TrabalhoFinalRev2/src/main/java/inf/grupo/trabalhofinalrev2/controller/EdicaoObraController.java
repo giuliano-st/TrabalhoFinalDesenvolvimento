@@ -84,6 +84,8 @@ public class EdicaoObraController {
     }
 
     public void setObraSelecionada(Obra obra) {
+        System.out.println("Obra selecionada: " + obra.getTituloPrincipal());
+        System.out.println("ID do autor da obra: " + obra.getIdAutor());
         this.obraSelecionada = obra;
         carregarAssuntos();
         carregarEditoras();

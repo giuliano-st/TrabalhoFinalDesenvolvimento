@@ -117,6 +117,8 @@ public class ObraDAO {
         o.setNotasGerais(rs.getString("Notas_Gerais"));
         o.setIdEditora(rs.getInt("FK_Editora_ID"));
         o.setIdAssunto(rs.getInt("FK_Assunto_ID"));
+        Integer idAutor = rs.getObject("FK_Autores_ID", Integer.class);
+        o.setIdAutor(idAutor);
 
         return o;
     }
