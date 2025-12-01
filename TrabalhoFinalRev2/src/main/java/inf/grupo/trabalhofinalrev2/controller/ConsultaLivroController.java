@@ -27,15 +27,17 @@ public class ConsultaLivroController {
     @FXML private TextField txtAutor;
     @FXML private TextField txtEditora;
     @FXML private TextField txtData;
-    @FXML private TextField txtColecao;
+    // ALTERADO: O campo de texto para filtro agora é "Assunto"
+    @FXML private TextField txtAssunto;
     @FXML private TextField txtIsbn;
 
     @FXML private TableView<Obra> tabelaLivros;
-    @FXML private TableColumn<Obra, Integer> colID;
+    // REMOVIDO: Coluna colID
     @FXML private TableColumn<Obra, String> colTitulo;
     @FXML private TableColumn<Obra, String> colAutor;
     @FXML private TableColumn<Obra, String> colEditora;
-    @FXML private TableColumn<Obra, String> colColecao;
+    // ALTERADO: Coluna colColecao para colAssunto
+    @FXML private TableColumn<Obra, String> colAssunto;
     @FXML private TableColumn<Obra, String> colIsbn;
     @FXML private TableColumn<Obra, String> colData;
 
@@ -45,13 +47,16 @@ public class ConsultaLivroController {
     @FXML
     public void initialize() {
         // Inicialização das colunas
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        // Coluna ID removida
+
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("tituloPrincipal"));
-        // O autor é mapeado para a propriedade 'nome' no mapeamento da consulta,
-        // mas você pode preferir mapear para 'autorNome' se tiver essa propriedade no model
+        // O autor é mapeado para a propriedade 'nome' no mapeamento da consulta (manutenção do código original)
         colAutor.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colEditora.setCellValueFactory(new PropertyValueFactory<>("editoraNome"));
-        colColecao.setCellValueFactory(new PropertyValueFactory<>("colecao"));
+
+        // Mapeamento da nova coluna Assunto (assumindo a propriedade "assuntoNome" no model Obra)
+        colAssunto.setCellValueFactory(new PropertyValueFactory<>("assuntoNome"));
+
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
@@ -61,28 +66,27 @@ public class ConsultaLivroController {
         aplicarFiltros();
 
         // 2. Adiciona listeners a todos os campos de texto para chamar aplicarFiltros()
-        // sempre que o texto for alterado, garantindo o filtro em tempo real.
         txtTitulo.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
         txtAutor.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
         txtEditora.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
         txtData.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
-        txtColecao.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
+        // ALTERADO: Listener para o novo campo txtAssunto
+        txtAssunto.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
         txtIsbn.textProperty().addListener((obs, oldValue, newValue) -> aplicarFiltros());
     }
 
-    /**
-     * Aplica os filtros atuais dos campos de texto na busca ao banco de dados
-     * e atualiza a tabela. Este método substitui o handleBuscarLivros().
-     */
+
     private void aplicarFiltros() {
         String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();
         String editora = txtEditora.getText();
         String data = txtData.getText();
-        String colecao = txtColecao.getText();
+        // ALTERADO: Campo colecao substituído por assunto
+        String assunto = txtAssunto.getText();
         String isbn = txtIsbn.getText();
 
-        List<Obra> resultados = obraDAO.buscarLivrosFiltrados(titulo, autor, editora, data, colecao, isbn);
+        // buscarLivrosFiltrados NO SEU ObraDAO para usar 'assunto' ao invés de 'colecao'.
+        List<Obra> resultados = obraDAO.buscarLivrosFiltrados(titulo, autor, editora, data, assunto, isbn);
         listaObras.clear();
         listaObras.addAll(resultados);
     }
@@ -104,7 +108,7 @@ public class ConsultaLivroController {
                 stage.initModality(Modality.APPLICATION_MODAL);
 
                 DetalhesLivroController controller = loader.getController();
-                controller.setObra(obraSelecionada); // Assumindo que você tem este método
+                controller.setObra(obraSelecionada);
 
                 stage.showAndWait();
             } catch (IOException e) {
@@ -160,7 +164,7 @@ public class ConsultaLivroController {
         if (obraSelecionada != null) {
             try {
                 // 1. Busca os exemplares no banco
-                // O método buscarExemplaresNoBanco é uma simulação, assegure-se que ele existe no seu ObraDAO
+
                 List<ExemplarTabela> exemplares = obraDAO.buscarExemplaresNoBanco(obraSelecionada.getId());
 
                 if (exemplares.isEmpty()) {

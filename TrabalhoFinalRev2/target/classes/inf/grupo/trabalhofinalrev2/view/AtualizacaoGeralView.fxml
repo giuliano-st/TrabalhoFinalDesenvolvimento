@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="inf.grupo.trabalhofinalrev2.controller.AtualizacaoGeralController">
+
+    <!-- Topo com título -->
+    <top>
+        <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Label text="Atualização de Obras ✏️" textFill="#006494">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Separator />
+        </VBox>
+    </top>
+
+    <!-- Conteúdo central -->
+    <center>
+        <VBox spacing="15.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <!-- Seleção de tipo -->
+            <ComboBox fx:id="comboTipo" promptText="Selecione o tipo" />
+
+            <!-- Tabela -->
+            <TableView fx:id="tabelaObras" prefHeight="250">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colTitulo" text="Título" prefWidth="200"/>
+                    <TableColumn fx:id="colTipo" text="Tipo" prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Rodapé com botões -->
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Editar Selecionado" onAction="#editarSelecionado"
+                    style="-fx-font-weight: bold; -fx-background-color: #f0ad4e; -fx-text-fill: white; -fx-padding: 8 15;" />
+            <Button text="Atualizar Tabela" onAction="#atualizarTabela"
+                    style="-fx-font-weight: bold; -fx-background-color: #008CBA; -fx-text-fill: white; -fx-padding: 8 15;" />
+        </HBox>
+    </bottom>
+</BorderPane>

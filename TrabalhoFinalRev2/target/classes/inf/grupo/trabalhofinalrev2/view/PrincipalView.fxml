@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="510.0" prefWidth="780" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inf.grupo.trabalhofinalrev2.controller.PrincipalController">
+
+    <!-- Barra superior -->
+    <top>
+        <ToolBar>
+            <MenuBar>
+                <Menu text="Cadastro">
+                    <MenuItem onAction="#onCadastroGeral" text="Cadastrar Obra" />
+                    <MenuItem onAction="#onRemoverGeral" text="Remover Obra" />
+                    <MenuItem onAction="#onAtualizarGeral" text="Atualizar Obra" />
+                </Menu>
+                <Menu text="Consulta">
+                    <MenuItem onAction="#onConsultaLivro" text="Livro" />
+                    <MenuItem onAction="#onConsultaJornal" text="Jornal" />
+                    <MenuItem onAction="#onConsultaRevista" text="Revista" />
+                </Menu>
+                <Menu text="Sair">
+                    <MenuItem fx:id="menuSair" onAction="#onSair" text="Fechar" />
+                </Menu>
+            </MenuBar>
+        </ToolBar>
+    </top>
+
+    <!-- Rodapé -->
+    <bottom>
+        <GridPane hgap="10" prefHeight="0.0" prefWidth="780.0" vgap="10">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+
+            <columnConstraints>
+                <ColumnConstraints percentWidth="15.0" />
+                <ColumnConstraints percentWidth="35.0" />
+                <ColumnConstraints percentWidth="40.0" />
+                <ColumnConstraints percentWidth="10.0" />
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+
+            <!-- Texto de versão -->
+            <Label text="Versão 1.0.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        </GridPane>
+    </bottom>
+
+    <!-- Conteúdo central -->
+    <center>
+        <BorderPane prefHeight="407.0" prefWidth="780.0">
+            <top>
+                <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Bem-vindo(a)!" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets top="25.0" />
+               </padding></Label>
+            </top>
+            <center>
+                <ImageView fitHeight="277.0" fitWidth="171.0" preserveRatio="true" smooth="true">
+                    <image>
+                        <Image url="@../../../../imagens/F06-337.png" />
+                    </image>
+                </ImageView>
+            </center>
+        </BorderPane>
+    </center>
+
+</BorderPane>

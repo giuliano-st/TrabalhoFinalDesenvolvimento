@@ -404,7 +404,7 @@ public class ObraDAO {
           AND (? IS NULL OR aut.Nome LIKE ?)              -- Filtro por Nome do Autor
           AND (? IS NULL OR e.Nome LIKE ?)                -- Filtro por Nome da Editora
           AND (? IS NULL OR o.Data LIKE ?)
-          AND (? IS NULL OR o.Colecao LIKE ?)             -- Filtro por Coleção
+          AND (? IS NULL OR a.Assunto LIKE ?)             -- Filtro por Assunto
           AND (? IS NULL OR o.ISBN LIKE ?)                -- Filtro por ISBN
         ORDER BY o.Titulo_Principal
     """;
