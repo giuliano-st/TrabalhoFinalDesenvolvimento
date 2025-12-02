@@ -19,11 +19,11 @@ public class ConsultaJornalController {
     @FXML private TextField campoTitulo;
     @FXML private TextField campoData;
     @FXML private TextField campoIssn;
-    @FXML private TextField campoNomeJornal; // ALTERADO: Era campoEditora
+    @FXML private TextField campoNomeJornal;
     @FXML private TextField campoAssunto;
     @FXML private ComboBox<String> comboPeriodicidade;
 
-    @FXML private TableView<Obra> tabelaJornais; // ALTERADO: Nome da Tabela
+    @FXML private TableView<Obra> tabelaJornais;
     @FXML private Button btnDetalhes;
 
     private final ObraDAO obraDAO = new ObraDAO();
@@ -42,7 +42,6 @@ public class ConsultaJornalController {
         campoAssunto.textProperty().addListener((obs, oldV, newV) -> atualizarTabela());
         comboPeriodicidade.valueProperty().addListener((obs, oldV, newV) -> atualizarTabela());
 
-        // Carrega a tabela inicialmente
         atualizarTabela();
     }
 
@@ -93,23 +92,23 @@ public class ConsultaJornalController {
             periodicidade = comboPeriodicidade.getValue();
         }
 
-        // ALTERADO: Chamada ao método de busca de Jornais
+
         List<Obra> jornais = obraDAO.buscarJornaisFiltrados(
                 campoTitulo.getText(),
                 campoData.getText(),
                 campoIssn.getText(),
-                campoNomeJornal.getText(), // ALTERADO: Passando o Nome do Jornal
+                campoNomeJornal.getText(),
                 campoAssunto.getText(),
                 periodicidade
         );
 
-        tabelaJornais.getItems().setAll(jornais); // ALTERADO: Nome da Tabela
+        tabelaJornais.getItems().setAll(jornais);
     }
 
     @FXML
     private void onVerDetalhes() {
 
-        Obra selecionada = tabelaJornais.getSelectionModel().getSelectedItem(); // ALTERADO: Nome da Tabela
+        Obra selecionada = tabelaJornais.getSelectionModel().getSelectedItem();
 
         if (selecionada == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Selecione um jornal primeiro.");

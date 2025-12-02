@@ -46,8 +46,6 @@ public class ConsultaLivroController {
 
     @FXML
     public void initialize() {
-        // Inicialização das colunas
-        // Coluna ID removida
 
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("tituloPrincipal"));
         // O autor é mapeado para a propriedade 'nome' no mapeamento da consulta (manutenção do código original)
@@ -91,9 +89,7 @@ public class ConsultaLivroController {
         listaObras.addAll(resultados);
     }
 
-    /**
-     * Abre a tela de detalhes para a obra selecionada.
-     */
+
     @FXML
     private void handleVerDetalhes() {
         Obra obraSelecionada = tabelaLivros.getSelectionModel().getSelectedItem();
@@ -120,9 +116,7 @@ public class ConsultaLivroController {
         }
     }
 
-    /**
-     * Abre a tela de Capa para a obra selecionada.
-     */
+
     @FXML
     private void handleVisualizarCapa() {
         Obra obraSelecionada = tabelaLivros.getSelectionModel().getSelectedItem();
@@ -154,9 +148,7 @@ public class ConsultaLivroController {
         }
     }
 
-    /**
-     * Abre a tela de Disponibilidade para a obra selecionada.
-     */
+
     @FXML
     private void handleVerificarDisponibilidade() {
         Obra obraSelecionada = tabelaLivros.getSelectionModel().getSelectedItem();

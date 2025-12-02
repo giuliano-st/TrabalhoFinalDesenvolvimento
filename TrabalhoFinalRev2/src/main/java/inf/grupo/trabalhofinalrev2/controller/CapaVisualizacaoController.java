@@ -15,9 +15,6 @@ public class CapaVisualizacaoController {
             return;
         }
 
-        //  ADICIONE ESTA LINHA PARA VERIFICAR O CAMINHO
-        System.out.println("Caminho da Capa Recebido: " + caminhoCapa);
-
         try {
             // Conversão do caminho do sistema para URL
             File file = new File(caminhoCapa);
@@ -25,11 +22,6 @@ public class CapaVisualizacaoController {
 
             Image capaImage = new Image(imageUrl);
             capaView.setImage(capaImage);
-
-            // Opcional: Ajustar o tamanho do painel pai ao tamanho da imagem
-            // (Se não houver preferência de tamanho no FXML)
-            // capaView.setFitWidth(capaImage.getWidth());
-            // capaView.setFitHeight(capaImage.getHeight());
 
         } catch (MalformedURLException e) {
             System.err.println("Erro: O caminho do arquivo é inválido: " + caminhoCapa);

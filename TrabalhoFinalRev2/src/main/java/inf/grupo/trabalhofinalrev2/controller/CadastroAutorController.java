@@ -17,12 +17,10 @@ public class CadastroAutorController {
     private Stage stage;
     private Autor novoAutorCadastrado;
 
-    // Construtor ou método setStage
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    // Getter para pegar o novo objeto cadastrado de volta
     public Autor getNovoAutorCadastrado() {
         return novoAutorCadastrado;
     }

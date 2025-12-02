@@ -33,7 +33,7 @@ public class ConsultaRevistaController {
         comboPeriodicidade.getItems().addAll("QUALQUER","SEMANAL", "MENSAL", "BIMESTRAL", "ANUAL");
         comboPeriodicidade.setValue("QUALQUER");
         configurarColunas();
-
+        atualizarTabela();
         campoTitulo.textProperty().addListener((obs, oldV, newV) -> atualizarTabela());
         campoData.textProperty().addListener((obs, oldV, newV) -> atualizarTabela());
         campoIssn.textProperty().addListener((obs, oldV, newV) -> atualizarTabela());

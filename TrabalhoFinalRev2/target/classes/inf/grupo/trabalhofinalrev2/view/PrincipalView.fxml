@@ -20,9 +20,9 @@
         <ToolBar>
             <MenuBar>
                 <Menu text="Cadastro">
-                    <MenuItem onAction="#onCadastroGeral" text="Cadastrar Obra" />
-                    <MenuItem onAction="#onRemoverGeral" text="Remover Obra" />
-                    <MenuItem onAction="#onAtualizarGeral" text="Atualizar Obra" />
+                    <MenuItem fx:id="menuCadastroGeral" onAction="#onCadastroGeral" text="Cadastrar Obra" />
+                    <MenuItem fx:id="menuRemoverGeral" onAction="#onRemoverGeral" text="Remover Obra" />
+                    <MenuItem fx:id="menuAtualizarGeral" onAction="#onAtualizarGeral" text="Atualizar Obra" />
                 </Menu>
                 <Menu text="Consulta">
                     <MenuItem onAction="#onConsultaLivro" text="Livro" />

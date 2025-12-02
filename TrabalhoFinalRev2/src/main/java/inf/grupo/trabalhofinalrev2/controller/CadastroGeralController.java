@@ -361,8 +361,6 @@ public class CadastroGeralController {
         }
     }
 
-    // NOTA: Você deve aplicar a mesma lógica de tratamento de IOException para
-    // cadastrarNovaEditora() e cadastrarNovoAutor() para resolver o erro 'Location is not set'.
 
     @FXML
     private void cadastrarNovaEditora() {
