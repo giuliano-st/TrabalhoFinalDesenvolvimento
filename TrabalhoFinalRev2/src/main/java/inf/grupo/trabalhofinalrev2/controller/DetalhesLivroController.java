@@ -8,13 +8,12 @@ import javafx.stage.Stage;
 
 public class DetalhesLivroController {
 
-    // --- Campos de Detalhes da Obra (TextFields não editáveis) ---
-    // Identificação
+
     @FXML private TextField txtIdObra;
     @FXML private TextField txtTituloPrincipal;
     @FXML private TextField txtTituloUniforme;
     @FXML private TextField txtLocal;
-    @FXML private TextField txtData; // Campo corrigido no FXML e injetado aqui
+    @FXML private TextField txtData;
     @FXML private TextField txtISBN;
     @FXML private TextField txtEdicao;
     @FXML private TextField txtVolume;
@@ -38,22 +37,13 @@ public class DetalhesLivroController {
 
     @FXML
     public void initialize() {
-        // Inicialização de componentes (não é necessário nada aqui agora)
     }
 
-    /**
-     * Define a obra atual e inicia o preenchimento dos campos.
-     * @param obra Objeto Obra a ser exibido.
-     */
     public void setObra(Obra obra) {
         this.obraAtual = obra;
         preencherDetalhes();
     }
 
-    /**
-     * Preenche todos os campos de texto com os detalhes da obra.
-     * Implementa checagem de nulidade robusta para evitar NullPointerExceptions.
-     */
     private void preencherDetalhes() {
         if (obraAtual == null) return;
 
@@ -77,25 +67,17 @@ public class DetalhesLivroController {
         txtISBN.setText(obraAtual.getIsbn() != null ? obraAtual.getIsbn() : "");
         txtNumChamada.setText(obraAtual.getNumeroChamada() != null ? obraAtual.getNumeroChamada() : "");
         txtChamadaLocal.setText(obraAtual.getChamadaLocal() != null ? obraAtual.getChamadaLocal() : "");
+        txtSerie.setText(obraAtual.getSerie() != null ? obraAtual.getSerie() : "");
 
         // Campos numéricos (int) - Tratando 0 como vazio
         txtEdicao.setText(obraAtual.getEdicao() > 0 ? String.valueOf(obraAtual.getEdicao()) : "");
         txtVolume.setText(obraAtual.getVolume() > 0 ? String.valueOf(obraAtual.getVolume()) : "");
-        txtSerie.setText(obraAtual.getSerie() > 0 ? String.valueOf(obraAtual.getSerie()) : "");
 
         // 3. DESCRIÇÃO FÍSICA E NOTAS
         txtDescFisica.setText(obraAtual.getDescFisica() != null ? obraAtual.getDescFisica() : "");
         txtAreaNotasGerais.setText(obraAtual.getNotasGerais() != null ? obraAtual.getNotasGerais() : "");
     }
 
-    // ------------------------------------
-    // MÉTODOS DE AÇÃO DOS BOTÕES
-    // ------------------------------------
-
-    /**
-     * Fecha a janela de detalhes.
-     * Assume que o Stage pode ser obtido a partir de qualquer componente FXML injetado (ex: txtIdObra).
-     */
     @FXML
     private void fecharDetalhes() {
         // Obtém o Stage (janela) atual e o fecha
@@ -106,6 +88,5 @@ public class DetalhesLivroController {
                 currentStage.close();
             }
         }
-        // Se a inicialização falhar (embora improvável após o FXML ser corrigido), não tentará fechar.
     }
 }

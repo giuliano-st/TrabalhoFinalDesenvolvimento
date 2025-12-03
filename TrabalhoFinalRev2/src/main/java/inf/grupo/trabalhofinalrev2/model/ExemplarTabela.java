@@ -5,7 +5,6 @@ import javafx.beans.property.StringProperty;
 
 public class ExemplarTabela {
 
-    // O campo 'Número' é um número, mas pode ser tratado como String para a Tabela
     private final StringProperty numero;
     private final StringProperty disponibilidade;
 
@@ -14,16 +13,29 @@ public class ExemplarTabela {
         this.disponibilidade = new SimpleStringProperty(disponibilidade);
     }
 
-    // Getters para a TableView
+    // --- numero ---
+    public String getNumero() {
+        return numero.get();
+    }
+
+    public void setNumero(String numero) {
+        this.numero.set(numero);
+    }
+
     public StringProperty numeroProperty() {
         return numero;
+    }
+
+    // --- disponibilidade ---
+    public String getDisponibilidade() {
+        return disponibilidade.get();
+    }
+
+    public void setDisponibilidade(String disponibilidade) {
+        this.disponibilidade.set(disponibilidade);
     }
 
     public StringProperty disponibilidadeProperty() {
         return disponibilidade;
     }
-
-    // Métodos de acesso (opcional, mas boa prática)
-    public String getNumero() { return numero.get(); }
-    public String getDisponibilidade() { return disponibilidade.get(); }
 }

@@ -153,7 +153,7 @@ public class EdicaoObraController {
             obraSelecionada.setChamadaLocal(txtChamadaLocal.getText());
             obraSelecionada.setTituloUniforme(txtTituloUniforme.getText());
             obraSelecionada.setIsbn(txtIsbn.getText());
-            obraSelecionada.setSerie(Integer.parseInt(txtSerie.getText()));
+            obraSelecionada.setSerie((txtSerie.getText()));
             obraSelecionada.setEdicao(Integer.parseInt(txtEdicao.getText()));
             obraSelecionada.setColecao(txtColecao.getText());
             obraSelecionada.setNotasGerais(txtNotasGerais.getText());

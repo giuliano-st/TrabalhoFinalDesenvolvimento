@@ -201,8 +201,6 @@ public class CadastroGeralController {
             obra.setIdEditora(editoraSelecionada.getId());
             obra.setIdAutor(autorSelecionado.getId());
 
-            // Função auxiliar para converter String vazia para 0
-            // Usamos Integer para permitir null ou 0, dependendo da necessidade do DAO.
             java.util.function.Function<String, Integer> parseIfPresent = text -> {
                 if (text == null || text.trim().isEmpty()) return 0; // Usando 0 para campos INT não obrigatórios.
                 return Integer.parseInt(text.trim());
@@ -217,7 +215,7 @@ public class CadastroGeralController {
                     obra.setIsbn(txtIsbn.getText());
 
                     // Tratamento de campos numéricos (evita NumberFormatException)
-                    obra.setSerie(parseIfPresent.apply(txtSerie.getText()));
+                    obra.setSerie((txtSerie.getText()));
                     obra.setEdicao(parseIfPresent.apply(txtEdicao.getText()));
                     obra.setVolume(parseIfPresent.apply(txtVolumeLivro.getText()));
 
@@ -283,37 +281,6 @@ public class CadastroGeralController {
             alert.showAndWait();
         }
     }
-
-    // --- Métodos de Cadastro Auxiliares (Corrigidos para Debug) ---
-
-    private void abrirModalCadastro(String fxmlPath, String title) throws IOException {
-        // FERRAMENTA DE DEBUG: Imprimir a URL antes de tentar carregar
-        URL location = getClass().getResource(fxmlPath);
-
-        if (location == null) {
-            // Lança uma exceção clara se o FXML não for encontrado
-            throw new IOException("O recurso FXML não foi encontrado no caminho: " + fxmlPath +
-                    ". Verifique o caminho e a estrutura de pastas/classpath.");
-        }
-
-        FXMLLoader loader = new FXMLLoader(location);
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setTitle(title);
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-
-        // O controller deve ser setado aqui ou no caller para manipular o retorno
-        // Exemplo:
-        // if (loader.getController() instanceof SeuController) {
-        //     ((SeuController) loader.getController()).setStage(stage);
-        // }
-
-        stage.showAndWait();
-    }
-
 
     @FXML
     private void cadastrarNovoAssunto() {

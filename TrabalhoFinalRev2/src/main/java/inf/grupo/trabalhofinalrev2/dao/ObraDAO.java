@@ -102,7 +102,7 @@ public class ObraDAO {
         o.setData(rs.getString("Data"));
         o.setTituloUniforme(rs.getString("Titulo_Uniforme"));
         o.setIsbn(rs.getString("ISBN"));
-        o.setSerie(rs.getInt("Serie"));
+        o.setSerie(rs.getString("Serie"));
         o.setEdicao(rs.getInt("Edicao"));
         o.setColecao(rs.getString("Colecao"));
         o.setIssn(rs.getString("ISSN"));
@@ -121,91 +121,6 @@ public class ObraDAO {
         o.setIdAutor(idAutor);
 
         return o;
-    }
-
-    public List<Obra> buscarJornaisFiltrados(String titulo, String editora) {
-
-        List<Obra> lista = new ArrayList<>();
-
-        String sql = """
-        SELECT  o.*,
-                e.Nome    AS editora_nome,
-                a.Assunto AS assunto_nome
-        FROM obra o
-        LEFT JOIN editora e ON o.FK_Editora_ID = e.ID
-        LEFT JOIN assuntos a ON o.FK_Assunto_ID = a.ID
-        WHERE o.Tipo = 'Jornal'
-          AND (? IS NULL OR o.Titulo_Principal LIKE ?)
-          AND (? IS NULL OR e.Nome LIKE ?)
-        ORDER BY o.Titulo_Principal
-    """;
-
-        try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, titulo);
-            ps.setString(2, "%" + titulo + "%");
-
-            ps.setString(3, editora);
-            ps.setString(4, "%" + editora + "%");
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Obra o = mapearObra(rs);
-                o.setEditoraNome(rs.getString("editora_nome"));
-                o.setAssuntoNome(rs.getString("assunto_nome"));
-                lista.add(o);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return lista;
-    }
-
-    public List<Obra> filtrarObras(String tipo, String titulo, String editora) {
-        List<Obra> lista = new ArrayList<>();
-
-        String sql = """
-        SELECT  o.*,
-                e.Nome    AS editora_nome,
-                a.Assunto AS assunto_nome
-        FROM obra o
-        LEFT JOIN editora e ON o.FK_Editora_ID = e.ID
-        LEFT JOIN assuntos a ON o.FK_Assunto_ID = a.ID
-        WHERE o.Tipo = ?
-          AND (? IS NULL OR o.Titulo_Principal LIKE ?)
-          AND (? IS NULL OR e.Nome LIKE ?)
-        ORDER BY o.Titulo_Principal
-    """;
-
-        try (Connection conn = Conexao.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setString(1, tipo);
-
-            ps.setString(2, titulo);
-            ps.setString(3, "%" + titulo + "%");
-
-            ps.setString(4, editora);
-            ps.setString(5, "%" + editora + "%");
-
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Obra o = mapearObra(rs);
-                o.setEditoraNome(rs.getString("editora_nome"));
-                o.setAssuntoNome(rs.getString("assunto_nome"));
-                lista.add(o);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return lista;
     }
 
     public List<ExemplarTabela> buscarExemplaresNoBanco(int idObra) {
@@ -260,7 +175,7 @@ public class ObraDAO {
             stmt.setString(7, obra.getChamadaLocal());
             stmt.setString(8, obra.getTituloUniforme());
             stmt.setString(9, obra.getIsbn());
-            stmt.setObject(10, obra.getSerie(), Types.INTEGER);
+            stmt.setString(10, obra.getSerie());
             stmt.setObject(11, obra.getEdicao(), Types.INTEGER);
             stmt.setString(12, obra.getColecao());
             stmt.setString(13, obra.getNotasGerais());
@@ -362,7 +277,6 @@ public class ObraDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Atribuir os parâmetros
-            // Usando o mesmo padrão de IF IS NULL do método buscarRevistasFiltradas
             for (int i = 0; i < params.size(); i++) {
                 // O getObject() é mais seguro para atribuir null ou String
                 stmt.setObject(i + 1, params.get(i));
@@ -398,14 +312,14 @@ public class ObraDAO {
         FROM obra o
         LEFT JOIN editora e   ON o.FK_Editora_ID = e.ID
         LEFT JOIN assuntos a   ON o.FK_Assunto_ID = a.ID
-        LEFT JOIN autores aut ON o.FK_Autores_ID = aut.ID  -- JOIN com Tabela Autores
+        LEFT JOIN autores aut ON o.FK_Autores_ID = aut.ID  
         WHERE o.Tipo = 'LIVRO'
           AND (? IS NULL OR o.Titulo_Principal LIKE ?)
-          AND (? IS NULL OR aut.Nome LIKE ?)              -- Filtro por Nome do Autor
-          AND (? IS NULL OR e.Nome LIKE ?)                -- Filtro por Nome da Editora
+          AND (? IS NULL OR aut.Nome LIKE ?)              
+          AND (? IS NULL OR e.Nome LIKE ?)                
           AND (? IS NULL OR o.Data LIKE ?)
-          AND (? IS NULL OR a.Assunto LIKE ?)             -- Filtro por Assunto
-          AND (? IS NULL OR o.ISBN LIKE ?)                -- Filtro por ISBN
+          AND (? IS NULL OR a.Assunto LIKE ?)             
+          AND (? IS NULL OR o.ISBN LIKE ?)               
         ORDER BY o.Titulo_Principal
     """;
 
@@ -489,7 +403,7 @@ public class ObraDAO {
             stmt.setString(7, obra.getChamadaLocal());
             stmt.setString(8, obra.getTituloUniforme());
             stmt.setString(9, obra.getIsbn());
-            stmt.setObject(10, obra.getSerie(), Types.INTEGER);
+            stmt.setString(10, obra.getSerie());
             stmt.setObject(11, obra.getEdicao(), Types.INTEGER);
             stmt.setString(12, obra.getColecao());
             stmt.setString(13, obra.getNotasGerais());

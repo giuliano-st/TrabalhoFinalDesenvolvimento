@@ -12,7 +12,7 @@ public class Obra {
     private String chamadaLocal;
     private String tituloUniforme;
     private String isbn;
-    private int serie;
+    private String serie;
     private int edicao;
     private String colecao;
     private String notasGerais;
@@ -139,11 +139,11 @@ public class Obra {
         this.isbn = isbn;
     }
 
-    public int getSerie() {
+    public String getSerie() {
         return serie;
     }
 
-    public void setSerie(int serie) {
+    public void setSerie(String serie) {
         this.serie = serie;
     }
 

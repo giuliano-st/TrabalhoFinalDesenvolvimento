@@ -6,12 +6,12 @@
     -fx-text-fill: #dc3545;
     -fx-font-weight: bold;
 }
-/* Força a cor para a célula (table-cell) com a classe 'disponivel' */
+
 .table-cell.disponivel {
     -fx-text-fill: #49fa00 !important;
 }
 
-/* Você pode precisar fazer o mesmo para emprestado: */
+
 .table-cell.emprestado {
     -fx-text-fill: #dc3545;
 }
