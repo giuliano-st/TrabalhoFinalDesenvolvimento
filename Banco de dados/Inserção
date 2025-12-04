@@ -1,0 +1,131 @@
+
+-- Inserindo dados:
+-- Autores
+INSERT INTO AUTORES (Nome, Nacionalidade) VALUES
+('Joao Silva', 'BRA'),
+('Maria Costa', 'POR'),
+('Carlos Mendes', 'ARG'),
+('Ana Pereira', 'BRA'),
+('Ricardo Gomes', 'URU'),
+('Fernanda Lima', 'BRA'),
+('Luis Moreira', 'POR'),
+('Helena Duarte', 'ESP'),
+('Bruno Farias', 'BRA'),
+('Paula Mendonca', 'MEX');
+
+-- Assuntos
+INSERT INTO ASSUNTOS (Assunto) VALUES
+('Tecnologia'),
+('Historia'),
+('Ciencia'),
+('Arte'),
+('Fisica'),
+('Literatura'),
+('Programacao'),
+('Geografia'),
+('Saude'),
+('Filosofia');
+
+-- Editora
+INSERT INTO EDITORA (Nome) VALUES
+('Editora Alfa'),
+('Editora Beta'),
+('Nova Luz'),
+('Sol Nascente'),
+('Ponto Saber'),
+('Texto Vivo'),
+('Arvore Azul'),
+('Editora Prisma'),
+('Letra Forte'),
+('Caminho Novo');
+
+-- Obras - revistas e livros:
+INSERT INTO OBRA (
+    Titulo_Principal, Capa, Local, Data, Desc_Fisica,
+    Numero_Chamada, Chamada_Local, Titulo_Uniforme, ISBN,
+    Serie, Edicao, Colecao, Notas_Gerais, ISSN, Volume,
+    Periodicidade, Nome, Tipo,
+    FK_Assunto_ID, FK_Editora_ID, FK_Autores_ID
+) VALUES
+('Introducao a Programacao', 'capa1.png', 'Curitiba', '2024', '300p; il.', '001-A', 'L1', NULL, '1234567890123', 1, 1, 'Colecao A', 'Sem notas', NULL, NULL, NULL, NULL, 'Livro', 1, 1, 1),
+
+('Banco de Dados Essencial', 'capa2.png', 'Sao Paulo', '2022', '250p', '002-B', 'L2', NULL, '9788543000001', 1, 2, 'BD Colecao', 'Com graficos', NULL, NULL, NULL, NULL, 'Livro', 7, 4, 2),
+
+('Historia do Brasil', 'capa3.png', 'Brasilia', '2018', '500p', '003-C', 'H1', NULL, '9788549000002', 2, 3, 'Hist A', NULL, NULL, NULL, NULL, NULL, 'Livro', 2, 3, 3),
+
+('Revista Ciencia Hoje', 'rev1.png', 'Curitiba', '2023', '80p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '87654321', 12, 'Mensal', NULL, 'Revista', 3, 2, 4),
+
+('Revista Tech World', 'rev2.png', 'Sao Paulo', '2024', '60p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '99887766', 5, 'Mensal', NULL, 'Revista', 1, 1, 5),
+
+('Colecao Artes Modernas', 'capa4.png', 'Rio de Janeiro', '2021', '150p', '004-D', 'A1', NULL, '9788550000003', 1, 1, 'Arte+Serie', NULL, NULL, NULL, NULL, NULL, 'Livro', 4, 6, 6),
+
+('Atlas Geografico Mundial', 'capa5.png', 'Londres', '2017', '300p; mapas', '005-E', 'G1', NULL, '9788552000004', 4, 1, 'Geo Serie', NULL, NULL, NULL, NULL, NULL, 'Livro', 8, 7, 7),
+
+('Ciencia Espacial Hoje', 'rev3.png', 'Houston', '2020', '90p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '77665544', 8, 'Bimestral', NULL, 'Revista', 3, 8, 8),
+
+('Guia de Saude Moderna', 'capa6.png', 'Lisboa', '2023', '120p', '006-F', 'S1', NULL, '9788553000005', 2, 2, 'Saude Vida', NULL, NULL, NULL, NULL, NULL, 'Livro', 9, 9, 9),
+
+('Filosofia Simples', 'capa7.png', 'Porto Alegre', '2019', '200p', '007-G', 'F1', NULL, '9788554000006', 1, 1, 'Pensar+', NULL, NULL, NULL, NULL, NULL, 'Livro', 10, 10, 10);
+
+-- Exemplar
+INSERT INTO EXEMPLAR (Disponibilidade, Numero, FK_OBRA_ID) VALUES
+('Disponivel', 1, 1),
+('Emprestado', 2, 1),
+('Disponivel', 1, 2),
+('Emprestado', 2, 2),
+('Disponivel', 1, 3),
+('Disponivel', 1, 4),
+('Emprestado', 2, 4),
+('Disponivel', 1, 5),
+('Disponivel', 1, 6),
+('Emprestado', 2, 7);
+
+-- Secundarios
+INSERT INTO SECUNDARIOS (FK_OBRA_ID, FK_AUTORES_ID) VALUES
+(1, 2),
+(1, 3),
+(2, 1),
+(3, 4),
+(4, 5),
+(5, 6),
+(6, 7),
+(7, 8),
+(8, 9),
+(9, 10);
+
+-- Obras - jornais
+INSERT INTO OBRA (
+    Titulo_Principal, Capa, Local, Data, Desc_Fisica,
+    Numero_Chamada, Chamada_Local, Titulo_Uniforme, ISBN,
+    Serie, Edicao, Colecao, Notas_Gerais, ISSN, Volume,
+    Periodicidade, Nome, Tipo,
+    FK_Assunto_ID, FK_Editora_ID, FK_Autores_ID
+)
+VALUES
+('Jornal 1', 'j1.png', 'Cidade X', '2024', '30p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '11111111', NULL, 'Diario', 'Jornal 1', 'Jornal', 5, 3, 1),
+
+('Jornal 2', 'j2.png', 'Cidade X', '2024', '32p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '22222222', NULL, 'Diario', 'Jornal 2', 'Jornal', 5, 3, 2),
+
+('Jornal 3', 'j3.png', 'Cidade X', '2024', '28p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '33333333', NULL, 'Diario', 'Jornal 3', 'Jornal', 5, 3, 3),
+
+('Jornal 4', 'j4.png', 'Cidade X', '2024', '27p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '44444444', NULL, 'Diario', 'Jornal 4', 'Jornal', 5, 3, 4),
+
+('Jornal 5', 'j5.png', 'Cidade X', '2024', '31p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '55555555', NULL, 'Diario', 'Jornal 5', 'Jornal', 5, 3, 5),
+
+('Jornal 6', 'j6.png', 'Cidade X', '2024', '29p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '66666666', NULL, 'Diario', 'Jornal 6', 'Jornal', 5, 3, 6),
+
+('Jornal 7', 'j7.png', 'Cidade X', '2024', '26p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '77777777', NULL, 'Diario', 'Jornal 7', 'Jornal', 5, 3, 7),
+
+('Jornal 8', 'j8.png', 'Cidade X', '2024', '35p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '88888888', NULL, 'Diario', 'Jornal 8', 'Jornal', 5, 3, 8),
+
+('Jornal 9', 'j9.png', 'Cidade X', '2024', '40p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '99999999', NULL, 'Diario', 'Jornal 9', 'Jornal', 5, 3, 9),
+
+('Jornal 10', 'j10.png', 'Cidade X', '2024', '45p', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '10101010', NULL, 'Diario', 'Jornal 10', 'Jornal', 5, 3, 10);
+
+-- Selects
+SELECT * FROM OBRA;
+SELECT * FROM AUTORES;
+SELECT * FROM ASSUNTOS;
+SELECT * FROM SECUNDARIOS;
+SELECT * FROM EDITORA;
+SELECT * FROM EXEMPLAR;
